@@ -23,6 +23,50 @@ This project is designed for educational purposes to help understand the inner w
 
 ---
 
+## Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/Arian-jafari/TinyTorch.git
+cd TinyTorch
+```
+Install dependencies:
+
+```bash
+pip install numpy matplotlib
+```
+No deep learning frameworks are required — everything is built from scratch.
+
+## Quick Example
+
+```bash
+from module import MLP
+from tensor import Tensor
+from optimizer import SGD
+from loss import CrossEntropyWithSoftmax
+from activations import LU
+
+# Create dataset (example)
+X = Tensor([[0,0],[0,1],[1,0],[1,1]])
+y = Tensor([0,1,1,0])  # example labels
+
+# Define model
+model = MLP(num_features=2, num_classes=2)
+optimizer = SGD(model.parameters(), lr=0.01)
+loss_fn = CrossEntropyWithSoftmax
+
+# Training loop
+for epoch in range(100):
+    logits = model(X)
+    loss = loss_fn.apply(logits, y)
+    optimizer.zero_grad()
+    loss.backward()
+    optimizer.step()
+    if epoch % 10 == 0:
+        print(f"Epoch {epoch}, Loss: {loss.data}")
+```
+
 ## Project Structure
 
 ```
